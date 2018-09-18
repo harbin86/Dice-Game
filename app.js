@@ -30,6 +30,27 @@ document.querySelector('.btn-roll').addEventListener('click',function(){
 	var dice = Math.floor(Math.random() * 6) + 1;
 	diceDOM.style.display = 'block';
 	diceDOM.src = 'dice-' + dice + '.png';
+
+	if(dice !== 1) {
+		//Add score
+		roundScore += dice;
+		document.querySelector('#current-' + activePlayer).textContent = roundScore;
+	}
+	else{
+		//Next Player's turn
+		activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+		roundScore = 0;
+
+		//Reset current scores
+		document.getElementById('current-0').textContent = '0';
+		document.getElementById('current-1').textContent = '0';
+
+		//Adding and removing css active class indicating Player's turn
+		document.querySelector('.player-0-panel').classList.toggle('active');
+		document.querySelector('.player-1-panel').classList.toggle('active');
+
+		document.querySelector('.dice').style.display = 'none';
+	}
 });
 
 
